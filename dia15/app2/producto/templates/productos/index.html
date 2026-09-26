@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tienda iPhone | Productos</title>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- NAVBAR -->
+    <nav class="bg-black text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center font-bold text-xl">
+                    
+                </div>
+
+                <div>
+                    <h1 class="text-xl font-semibold">iPhone Store</h1>
+                    <p class="text-xs text-gray-400">Productos</p>
+                </div>
+            </div>
+
+            <a href="{% url 'logout' %}"
+               class="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition">
+                Cerrar sesión
+            </a>
+
+        </div>
+    </nav>
+
+
+    <!-- CONTENIDO -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+
+        <!-- TÍTULO -->
+        <div class="mb-8">
+            <p class="text-sm text-gray-500 uppercase tracking-widest">
+                Administración
+            </p>
+
+            <h2 class="text-4xl font-bold tracking-tight mt-1">
+                Productos
+            </h2>
+
+            <p class="text-gray-500 mt-2">
+                Administra el inventario de tu tienda.
+            </p>
+        </div>
+
+
+        <!-- FORMULARIO -->
+        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-10">
+
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-semibold">
+                        Agregar producto
+                    </h2>
+
+                    <p class="text-gray-500 text-sm mt-1">
+                        Ingresa los datos del nuevo producto.
+                    </p>
+                </div>
+
+                <div class="bg-black text-white px-4 py-2 rounded-full text-sm">
+                    Nuevo
+                </div>
+            </div>
+
+
+            <form method="post" action="{% url 'productos_crear' %}"
+                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                {% csrf_token %}
+
+                <!-- Código -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Código de barra
+                    </label>
+
+                    <input type="text"
+                           name="codigo_barra"
+                           placeholder="Ej: 123456789"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300
+                                  focus:outline-none focus:ring-2 focus:ring-black
+                                  focus:border-transparent transition">
+                </div>
+
+
+                <!-- Descripción -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Descripción
+                    </label>
+
+                    <input type="text"
+                           name="descripcion"
+                           placeholder="Ej: iPhone 17 Pro Max 256GB"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300
+                                  focus:outline-none focus:ring-2 focus:ring-black
+                                  focus:border-transparent transition">
+                </div>
+
+
+                <!-- IVA -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        IVA
+                    </label>
+
+                    <select name="iva"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300
+                                   bg-white focus:outline-none focus:ring-2
+                                   focus:ring-black focus:border-transparent">
+
+                        <option value="EXENTO">Exento</option>
+                        <option value="5">5%</option>
+                        <option value="10">10%</option>
+
+                    </select>
+                </div>
+
+
+                <!-- Precio costo -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Precio costo
+                    </label>
+
+                    <input type="number"
+                           step="0.01"
+                           name="precio_costo"
+                           placeholder="0.00"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300
+                                  focus:outline-none focus:ring-2 focus:ring-black
+                                  focus:border-transparent">
+                </div>
+
+
+                <!-- Precio venta -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Precio venta
+                    </label>
+
+                    <input type="number"
+                           step="0.01"
+                           name="precio_venta"
+                           placeholder="0.00"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300
+                                  focus:outline-none focus:ring-2 focus:ring-black
+                                  focus:border-transparent">
+                </div>
+
+
+                <!-- Stock -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Stock
+                    </label>
+
+                    <input type="number"
+                           name="stock"
+                           placeholder="0"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300
+                                  focus:outline-none focus:ring-2 focus:ring-black
+                                  focus:border-transparent">
+                </div>
+
+
+                <!-- Unidad -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Unidad de medida
+                    </label>
+
+                    <input type="text"
+                           name="unidad_medida"
+                           placeholder="Ej: unidad"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300
+                                  focus:outline-none focus:ring-2 focus:ring-black
+                                  focus:border-transparent">
+                </div>
+
+
+                <!-- Botón -->
+                <div class="md:col-span-2 lg:col-span-4 flex justify-end mt-3">
+
+                    <button type="submit"
+                            class="bg-black text-white px-8 py-3 rounded-full
+                                   font-medium hover:bg-gray-800
+                                   transition duration-200 shadow-sm">
+
+                        + Guardar producto
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- LISTADO -->
+        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+
+            <div class="px-8 py-6 border-b border-gray-200">
+
+                <h2 class="text-2xl font-semibold">
+                    Inventario
+                </h2>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Productos registrados en la tienda.
+                </p>
+
+            </div>
+
+
+            <div class="overflow-x-auto">
+
+                <table class="w-full text-sm">
+
+                    <thead class="bg-gray-50">
+
+                        <tr class="text-left text-gray-500 uppercase text-xs tracking-wider">
+
+                            <th class="px-6 py-4">Código</th>
+                            <th class="px-6 py-4">Descripción</th>
+                            <th class="px-6 py-4">P. Costo</th>
+                            <th class="px-6 py-4">P. Venta</th>
+                            <th class="px-6 py-4">IVA</th>
+                            <th class="px-6 py-4">Stock</th>
+                            <th class="px-6 py-4">Unidad</th>
+                            <th class="px-6 py-4 text-center">Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody class="divide-y divide-gray-100">
+
+                        {% for producto in productos %}
+
+                        <tr class="hover:bg-gray-50 transition">
+
+                            <td class="px-6 py-4 text-gray-500">
+                                {{ producto.codigo_barra }}
+                            </td>
+
+                            <td class="px-6 py-4 font-medium">
+                                {{ producto.descripcion }}
+                            </td>
+
+                            <td class="px-6 py-4">
+                                ₲ {{ producto.precio_costo }}
+                            </td>
+
+                            <td class="px-6 py-4 font-semibold">
+                                ₲ {{ producto.precio_venta }}
+                            </td>
+
+                            <td class="px-6 py-4">
+
+                                {% if producto.iva == "10" %}
+
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">
+                                        10%
+                                    </span>
+
+                                {% elif producto.iva == "5" %}
+
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">
+                                        5%
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">
+                                        Exento
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td class="px-6 py-4">
+
+                                {% if producto.stock > 0 %}
+
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
+                                        {{ producto.stock }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">
+                                        Sin stock
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td class="px-6 py-4 text-gray-500">
+                                {{ producto.unidad_medida }}
+                            </td>
+
+
+                            <td class="px-6 py-4">
+
+                                <div class="flex justify-center gap-2">
+
+                                    <a href="{% url 'productos_editar' producto.id %}"
+                                       class="px-4 py-2 rounded-lg bg-gray-100
+                                              hover:bg-gray-200 transition text-sm">
+                                        Editar
+                                    </a>
+
+                                    <a href="{% url 'productos_eliminar' producto.id %}"
+                                       class="px-4 py-2 rounded-lg bg-black text-white
+                                              hover:bg-gray-800 transition text-sm">
+                                        Eliminar
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="8"
+                                class="px-6 py-12 text-center text-gray-500">
+
+                                No hay productos registrados.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="text-center py-8 text-sm text-gray-400">
+
+        iPhone Store · Administración de productos
+
+    </footer>
+
+</body>
+</html>
